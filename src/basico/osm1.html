@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Leaflet Quick Start Guide Example</title>
+	<title>Leaflet con GeoJSON</title>
 	<meta charset="utf-8" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<link rel="stylesheet" href="../../javascripts/leaflet/leaflet.css" />
 </head>
 <body>
 	<div id="mapid" style="width: 600px; height: 400px"></div>
 
-	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+	<script src="../../javascripts/leaflet/leaflet.js"></script>
 	<script src="limite.geojson" type="text/javascript"></script>
 	<script>
 
@@ -31,7 +31,7 @@
 			color: 'red',
 			fillColor: '#f03',
 			fillOpacity: 0.5
-		}).addTo(map).bindPopup("I am a circle.");
+		}).addTo(map).bindPopup("Soy un círculo.");
 
 
 		var popup = L.popup();
@@ -42,12 +42,6 @@
 				return feature.properties && feature.properties.style;
 			},
 		}).addTo(map);		
-		
-		
-
-		
-		
-		
 		
 
 	</script>
