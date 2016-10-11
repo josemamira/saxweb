@@ -24,27 +24,21 @@
     </p>
 	<script src="../../../javascripts/leaflet/leaflet.js"></script>
 	<script>
-		var map;		
-	
-		var ceuta = new L.tileLayer('https://www.sigua.ua.es/es/test/mbtiles.php?db=ceuta.mbtiles?dl=1&z={z}&x={x}&y={y}', {
+		var map;
+		var ceuta = new L.tileLayer('https://www.sigua.ua.es/es/test/mbtiles?db=ceuta.mbtiles&z={z}&x={x}&y={y}', {
 		    tms: true,
-		    attribution: 'Cortesia del <a href="http://www.ign.es" target="_blank">IGN</a>',
+		    attribution: 'Tiles cortesia del <a href="http://www.ign.es" target="_blank">IGN</a>',
 		    opacity: 0.7
 		});
 
 
 		map = new L.Map("map",{
 			//minZoom:10,
-			//maxZoom:19,
-			zoom: 18,
-            		center: [35.8885380012,-5.3185921685],
+			maxZoom:15,
+			zoom: 11,
+            center: [35.8885380012,-5.3185921685],
 			layers: [ceuta]
 		});
-		L.marker([35.8885380012,-5.3185921685]).addTo(map);
-
-
-
-		//ceuta.addTo(map);
 
 	</script>
 </body>
