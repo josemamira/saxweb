@@ -19,9 +19,15 @@
 		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 	});
     var marker = L.marker([38.5365419,-0.8202874], {icon: myIcon});
-        
+    var pnoa = L.tileLayer.wms('http://www.ign.es/wms-inspire/pnoa-ma', {
+	layers: 'OI.OrthoimageCoverage',
+	format: 'image/png',
+	transparent: false,
+	continuousWorld : true,
+	attribution: 'PNOA cedido por © <a href="http://www.ign.es/ign/main/index.do" target="_blank">Instituto Geográfico Nacional de España</a>'
+});    
 	
-        var pnoa = L.tileLayer.wms('https://www.ign.es/wms-inspire/pnoa-ma?', { layers: 'ne:OI.OrthoimageCoverage'} );
+        //var pnoa = L.tileLayer.wms('https://www.ign.es/wms-inspire/pnoa-ma?', { layers: 'ne:OI.OrthoimageCoverage'} );
 	    
 	// osm layer
 	var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
