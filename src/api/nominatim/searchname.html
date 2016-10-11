@@ -26,7 +26,7 @@ $("#btnSubmit").click(function(){
 	if (!locationVal) {
 		alert("NO has escrito nada");
 	} else {
-		var geocode = ' http://nominatim.openstreetmap.org/search?format=json&q=' + locationVal; //alert(geocode);
+		var geocode = ' https://nominatim.openstreetmap.org/search?format=json&q=' + locationVal; //alert(geocode);
      	// llamada jquery para obtener json
 		$.getJSON(geocode, function(data) {
 			/* obtener datos del json (sólo del 1er elemento del array). Voy a obtener licencia y latlong. Puedes incluir cualquiera de estos:  
