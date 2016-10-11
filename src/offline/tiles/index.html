@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet PHP/MBTiles</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
+</head>
+<body>
+	<a href="https://github.com/bmcbride/PHP-MBTiles-Server">
+		<img style="position: absolute; top: 0; right: 0; border: 0;" 
+		src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+	<div id="map" style="width: 600px; height: 400px"></div>
+	<p>Este ejemplo demuestra el uso de dos ficheros MbTiles</p>
+	<ul>
+		<li><strong>alacant.mbtiles</strong> (420 Mb): Procedente de la cartografía base del IGN. Niveles 10 al 15. Ámbito: provincia de Alicante</li>
+		<li><strong>sax_pnoa_16_20.mbtiles</strong> (185 Mb): Procedente del WMS del PNOA. Niveles 16 al 20: Ámbito: zona urbana Sax</li>
+	</ul>
+	<p>Para utilizar esta utilidad necesitas:</p>
+        <ul>
+            <li>Un servidor web (Apache), PHP y PHP-PDO</li>
+            <li>Descarga el script PHP-MBTiles-Server PHP desde aquí: <a href="https://github.com/bmcbride/PHP-MBTiles-Server/blob/master/mbtiles.php" target="_blank">PHP-MBTiles-Server</a> (requires PHP/PDO).</li>
+         </ul>
+    </p>
+	<script src="../../../javascripts/leaflet/leaflet.js"></script>
+	<script>
+		var map;
+
+		// Fichero alacant.mbtiles . Contiene tiles del nivel 10 al 15
+		var mbTiles10_15 = new L.tileLayer('./mbtiles.php?db=alacant.mbtiles&z={z}&x={x}&y={y}', {
+		    tms: true,
+		    attribution: 'Tiles cortesia del <a href="http://www.ign.es" target="_blank">IGN</a>',
+		    opacity: 0.7
+		});
+
+		// Fichero sax_pnoa_16_20.mbtiles (185 mb). Contiene tiles del nivel 16 al 20
+		var mbTiles16_20 = new L.tileLayer('./mbtiles.php?db=sax_pnoa_16_20.mbtiles&z={z}&x={x}&y={y}', {
+		    tms: true,
+		    attribution: 'Tiles cortesía del <a href="http://www.ign.es" target="_blank">IGN</a>',
+		    opacity: 0.7
+		});
+
+		map = new L.Map("map",{
+			minZoom:10,
+			maxZoom:19,
+			zoom: 11,
+            center: [38.5365419,-0.8202874],
+			layers: [mbTiles10_15,mbTiles16_20]
+		});
+
+		/*mbTiles10_15.addTo(map);
+		mbTiles16_20.addTo(map);*/
+
+	</script>
+</body>
+</html>
