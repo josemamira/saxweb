@@ -20,15 +20,9 @@
 	});
     var marker = L.marker([38.5365419,-0.8202874], {icon: myIcon});
         
-        
-        
-        
-	var pnoa = L.tileLayer('sax/pnoa/{z}/{x}/{y}.png', {
-				minZoom: 8,
-				maxZoom: 19,
-				attribution: 'CNIG',
-				//tms: true
-			});
+	
+        var pnoa = L.tileLayer.wms('www.ign.es/wms-inspire/pnoa-ma?', { layers: 'ne:OI.OrthoimageCoverage'} );
+	    
 	// osm layer
 	var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
 		attr_overpass = 'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
