@@ -27,14 +27,15 @@
 		var map;
 
 		// Fichero alacant.mbtiles . Contiene tiles del nivel 10 al 15
-		var mbTiles10_15 = new L.tileLayer('./mbtiles.php?db=alacant.mbtiles&z={z}&x={x}&y={y}', {
+		//var mbTiles10_15 = new L.tileLayer('./mbtiles.php?db=alacant.mbtiles&z={z}&x={x}&y={y}', {
+		var mbTiles10_15 = new L.tileLayer('https://www.sigua.ua.es/es/accesos/mbtiles.php?db=alacant.mbtiles&z={z}&x={x}&y={y}', {
 		    tms: true,
 		    attribution: 'Tiles cortesia del <a href="http://www.ign.es" target="_blank">IGN</a>',
 		    opacity: 0.7
 		});
 
 		// Fichero sax_pnoa_16_20.mbtiles (185 mb). Contiene tiles del nivel 16 al 20
-		var mbTiles16_20 = new L.tileLayer('./mbtiles.php?db=sax_pnoa_16_20.mbtiles&z={z}&x={x}&y={y}', {
+		var mbTiles16_20 = new L.tileLayer('https://www.sigua.ua.es/es/accesos/mbtiles.php?db=sax_pnoa_16_20.mbtiles&z={z}&x={x}&y={y}', {
 		    tms: true,
 		    attribution: 'Tiles cortesía del <a href="http://www.ign.es" target="_blank">IGN</a>',
 		    opacity: 0.7
