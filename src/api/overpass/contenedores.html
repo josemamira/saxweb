@@ -84,7 +84,7 @@
 
     //OverPassAPI overlay
     var op2 = new L.OverPassLayer({
-      endpoint: "http://overpass-api.de/api/",
+      endpoint: "https://overpass-api.de/api/",
       query: "node(BBOX)['amenity'='waste_basket'];out;",
       callback: function(data) {
         for(var i=0;i<data.elements.length;i++) {
