@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet turbopass</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<link rel="stylesheet" href="css/OverPassLayer.css" />
+	
+	  <style>
+		body {
+		  padding: 0;
+		  margin: 0;
+		}
+		html, body, #map {
+		  height: 100%;
+		  width: 100%;
+		}
+	  </style>
+</head>
+
+<body>
+	<div id="map"></div>
+
+	<script src="../../../leaflet/leaflet.js"></script>
+	<script src="../../../overpass/OverPassLayer.js"></script>
+	<script>
+
+	var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
+      attr_overpass = 'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
+    var osm = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 0.7, attribution: [attr_osm, attr_overpass].join(', ')});
+    
+    var map = new L.Map('map').addLayer(osm).setView(new L.LatLng(38.5365419,-0.8202874), 15);
+    
+    var marker = L.marker([38.5365419,-0.8202874]).addTo(map);
+    
+    var mycIcon = L.icon({
+		iconUrl: 'myc2.svg',
+		iconSize:     [25, 25], // size of the icon
+		iconAnchor:   [22, 25], // point of the icon which will correspond to marker's location
+		popupAnchor:  [-3, -28] // point from which the popup should open relative to the iconAnchor
+		});
+    
+    
+    
+//http://overpass-turbo.eu/overpass-api.de/api/
+// http://overpass-api.de/api/interpreter
+    //OverPassAPI overlay
+    var opl = new L.OverPassLayer({
+      endpoint: "https://overpass-api.de/api/",
+      query: "node(BBOX)['social_centre'='yes'];out;",
+      callback: function(data) {
+        for(var i=0;i<data.elements.length;i++) {
+          var e = data.elements[i];
+
+          if (e.id in this.instance._ids) return;
+          this.instance._ids[e.id] = true;
+          var pos = new L.LatLng(e.lat, e.lon);
+          var popup = this.instance._poiInfo(e.tags,e.id);
+          var marker = L.marker(pos, {icon: mycIcon}).addTo(map)
+          .bindPopup(popup);
+          this.instance.addLayer(marker);          
+          
+          
+          
+          /*
+          var popup = this.instance._poiInfo(e.tags,e.id);
+          var color = e.tags.collection_times ? 'green':'red';
+          
+          var circle = L.circle(pos, 50, {
+            color: color,
+            fillColor: '#fa3',
+            fillOpacity: 0.5
+          })
+          .bindPopup(popup);
+          this.instance.addLayer(circle);*/
+        }
+      },
+      minZoomIndicatorOptions: {
+        position: 'topright',
+        minZoomMessageNoLayer: "no layer assigned",
+        minZoomMessage: "current Zoom-Level: CURRENTZOOM all data at Level: MINZOOMLEVEL"
+      }
+    });
+    map.addLayer(opl);
+	</script>
+</body>
+</html>
+
