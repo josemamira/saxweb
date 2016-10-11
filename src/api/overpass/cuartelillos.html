@@ -6,8 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
-	<link rel="stylesheet" href="css/OverPassLayer.css" />
-	
+		
 	  <style>
 		body {
 		  padding: 0;
@@ -17,6 +16,14 @@
 		  height: 100%;
 		  width: 100%;
 		}
+		.leaflet-control-minZoomIndicator {
+		    font-size: 2em;
+		    background: #ffffff;
+		    background-color: rgba(255,255,255,0.7);
+		    border-radius: 10px;
+		    padding: 1px 15px;
+		    opacity: 0.5;   
+		}  
 	  </style>
 </head>
 
@@ -24,7 +31,7 @@
 	<div id="map"></div>
 
 	<script src="../../../javascripts/leaflet/leaflet.js"></script>
-	<script src="../../../javascripts/overpass/OverPassLayer.js"></script>
+	
 	<script>
 
 	var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
@@ -61,20 +68,7 @@
           var marker = L.marker(pos, {icon: mycIcon}).addTo(map)
           .bindPopup(popup);
           this.instance.addLayer(marker);          
-          
-          
-          
-          /*
-          var popup = this.instance._poiInfo(e.tags,e.id);
-          var color = e.tags.collection_times ? 'green':'red';
-          
-          var circle = L.circle(pos, 50, {
-            color: color,
-            fillColor: '#fa3',
-            fillOpacity: 0.5
-          })
-          .bindPopup(popup);
-          this.instance.addLayer(circle);*/
+
         }
       },
       minZoomIndicatorOptions: {
