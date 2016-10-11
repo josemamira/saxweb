@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Leaflet: reverse geocoding</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+	<link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
+	<script src="./../../javascripts/leaflet/leaflet.js"></script>
+	<script src="./../../javascripts/jquery/jquery-3.1.1.min.js"></script>
+
+
+</head>
+<body>
+
+
+<div id="map" style="width: 600px; height: 400px;"></div>
+<script>
+
+var map = L.map('map').setView([38.5365419,-0.8202874], 15);
+	
+var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+L.tileLayer(osmUrl, {
+	attribution: '<a href="http://openstreetmap.org">OpenStreetMap</a> <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+}).addTo(map);		
+
+var popup = L.popup();
+
+// Evento click en el mapa
+function onMapClick(e) {
+	var lat = e.latlng.lat;
+	var lon = e.latlng.lng;
+	//alert (lat + ' ' + lon);
+	var reversegeocode = 'https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lon+'&zoom=18&addressdetails=1'; //alert(reversegeocode);
+  
+    $.getJSON(reversegeocode, function(data) {	
+		var display_name = data.display_name;	//alert(display_name ); 
+		popup
+			.setLatLng(e.latlng)
+			.setContent(display_name)
+			.openOn(map);
+
+	}); 
+}	
+	
+map.on('click', onMapClick);
+
+</script>
+
+</body>
+</html>
