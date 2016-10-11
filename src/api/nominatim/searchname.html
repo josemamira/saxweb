@@ -40,7 +40,7 @@ $("#btnSubmit").click(function(){
 			alert("la consulta ha devuelto :" + data.length + " resultados");
 			// Recorrer el array data para obtener el nombre y mostrarlo en el id listado
 			$.each(data, function( i, value ) { 
-				$( "#listado" ).append( "<li><a href='http://www.openstreetmap.org/relation/"+data[0].osm_id+"'>"+data[i].display_name+"</a></li>" ); 
+				$( "#listado" ).append( "<li><a href='https://www.openstreetmap.org/relation/"+data[0].osm_id+"'>"+data[i].display_name+"</a></li>" ); 
 			});
 		});     
 	}  
