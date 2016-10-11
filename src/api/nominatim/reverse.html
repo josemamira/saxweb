@@ -39,7 +39,7 @@ function onMapClick(e) {
 	var reversegeocode = 'https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lon+'&zoom=18&addressdetails=1'; //alert(reversegeocode);
   
     $.getJSON(reversegeocode, function(data) {
-	var msg = data.display_name + '<br><a href="https://www.openstreetmap.org/'+ data.osm_type +'/'+ data.osm.id +'">enlace</a>';
+	var msg = data.display_name + '<br><a href="https://www.openstreetmap.org/'+ data.osm_type +'/'+ data.osm_id +'">enlace</a>';
 	//var display_name = data.display_name;	//alert(display_name ); 
 	popup
 		.setLatLng(e.latlng)
