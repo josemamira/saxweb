@@ -75,16 +75,21 @@
 </h3>
 
 <p>En el contenedor de mapas utilizado (Leaflet) se dispone de multitud de opciones para añadir capas procedentes de diferentes proveedores. Podemos hacer una primera clasificación entre los proveedores que precisan de conexión a Internet, y luego aquellos que trabajan en modo <i>off-line</i>, porque los datos se encuentran localmente en el servidor.</p>
-<p>Conexión a Intenet: Proveedores externos de OpenStreetMap</p>
+<p>a)Conexión a Intenet: Proveedores externos de OpenStreetMap</p>
 <ul>
   <li><a href="src/online/tiles.html">WMS y servicios de tiles extenas</a></li>
   <li><a href="https://leaflet-extras.github.io/leaflet-providers/preview/">Varios proveedores (enlace externo)</a></li>
 </ul>            
-<p>Datos en local</p>
+<p>b) Datos en local</p>
+          <p>b.1. Directorio de Tiles: Directorio con una estructura basada en el estándard TMS </p>           
 <ul>
   <li><a href="src/offline/tiles/index.html">Conjunto de imágenes (tiles) en directorio TMS. Sin requerimientos</a></li>
-  <li><a href="src/offline/mbtiles/ceuta.html">Tiles alojadas en fichero MbTiles (SQLite). Requiere PHP y PHP-SQLite</a></li>
+  <li><a href="http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/">Nombre y estructura de las tiles - Enlace externo</a></li>
+</ul>           
+          <p>b.2. Fichero MbTiles: Base de datos de SQLite que contiene las imágenes en una tabla (tiles) </p> 
+<ul>
   <li><a href="src/offline/mbtiles/generar_mbtiles_Qgis.odt">Documento para generar MbTiles con Qgis</a></li>
+  <li><a href="src/offline/mbtiles/ceuta.html">Tiles alojadas en fichero MbTiles (SQLite). Requiere PHP y PHP-SQLite</a></li>
   <li><a href="https://www.sigua.ua.es/es/test/test.html">Tiles alojadas en fichero MbTiles (SQLite) - Enlace externo</a></li>
 </ul>            
           
