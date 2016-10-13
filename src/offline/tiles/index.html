@@ -1,57 +1,36 @@
-<!DOCTYPE html>
 <html>
 <head>
-	<title>Leaflet PHP/MBTiles</title>
+	<title>Tiles mapa sax (niveles 16 a 19)</title>
 	<meta charset="utf-8" />
-
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
+        <link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
 </head>
 <body>
+    <div id="map" style="width: 100%; height: 100%; padding: 0; margin: 0; background: #fff;"></div>
+    <script src="../../../javascripts/leaflet/leaflet.js"></script>
 
-	<div id="map" style="width: 600px; height: 400px"></div>
-	<p>Este ejemplo demuestra el uso de dos ficheros MbTiles</p>
-	<ul>
-		<li><strong>alacant.mbtiles</strong> (420 Mb): Procedente de la cartografía base del IGN. Niveles 10 al 15. Ámbito: provincia de Alicante</li>
-		<li><strong>sax_pnoa_16_20.mbtiles</strong> (185 Mb): Procedente del WMS del PNOA. Niveles 16 al 20: Ámbito: zona urbana Sax</li>
-	</ul>
-	<p>Para utilizar esta utilidad necesitas:</p>
-        <ul>
-            <li>Un servidor web (Apache), PHP y PHP-PDO</li>
-            <li>Descarga el script PHP-MBTiles-Server PHP desde aquí: <a href="https://github.com/bmcbride/PHP-MBTiles-Server/blob/master/mbtiles.php" target="_blank">PHP-MBTiles-Server</a> (requires PHP/PDO).</li>
-         </ul>
-    </p>
-	<script src="../../../javascripts/leaflet/leaflet.js"></script>
-	<script>
-		var map;
-
-		// Fichero alacant.mbtiles . Contiene tiles del nivel 10 al 15
-		//var mbTiles10_15 = new L.tileLayer('./mbtiles.php?db=alacant.mbtiles&z={z}&x={x}&y={y}', {
-		var mbTiles10_15 = new L.tileLayer('https://www.sigua.ua.es/es/test/mbtiles.php?db=https://www.sigua.ua.es/es/test/alacant.mbtiles?dl=1&z={z}&x={x}&y={y}', {
-		    tms: true,
-		    attribution: 'Tiles cortesia del <a href="http://www.ign.es" target="_blank">IGN</a>',
-		    opacity: 0.7
+    <script>
+		// limite navegación
+		var SW = L.latLng(38.53098, -0.82788),
+			NE = L.latLng(38.54152, -0.81372),
+			bbox = L.latLngBounds(SW, NE);
+        var map = L.map('map').setView([38.5365419,-0.8202874], 16);
+        L.tileLayer('saxtiles/{z}/{x}/{y}.png', {
+            minZoom: 16,
+            maxZoom: 19,
+            maxBounds: bbox,
+            attribution: '<a href="http://pnoa.ign.es/IGN-CNIG">PNOA@IGN</a>',
+            //tms: true
+        }).addTo(map);
+        map.setMaxBounds(bbox);
+        // marker
+        var defaultIcon = L.icon({
+			iconUrl: 'css/images/marker-icon.png',
+			iconSize:     [25, 41], 
+			iconAnchor:   [22, 94], 
+			popupAnchor:  [-3, -76] 
 		});
-
-		// Fichero sax_pnoa_16_20.mbtiles (185 mb). Contiene tiles del nivel 16 al 20
-		var mbTiles16_20 = new L.tileLayer('https://www.sigua.ua.es/es/test/mbtiles.php?db=https://www.sigua.ua.es/es/test/sax_pnoa_16_20.mbtiles&z={z}&x={x}&y={y}', {
-		    tms: true,
-		    attribution: 'Tiles cortesía del <a href="http://www.ign.es" target="_blank">IGN</a>',
-		    opacity: 0.7
-		});
-
-		map = new L.Map("map",{
-			minZoom:10,
-			maxZoom:19,
-			zoom: 11,
-            center: [38.5365419,-0.8202874],
-			layers: [mbTiles10_15,mbTiles16_20]
-		});
-
-		/*mbTiles10_15.addTo(map);
-		mbTiles16_20.addTo(map);*/
-
-	</script>
+        var marker = L.marker([38.5365419,-0.8202874], {icon: defaultIcon}).addTo(map);
+    </script>
 </body>
 </html>
+
