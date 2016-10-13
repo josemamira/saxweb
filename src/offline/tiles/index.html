@@ -20,16 +20,10 @@
             maxBounds: bbox,
             attribution: '<a href="http://pnoa.ign.es/IGN-CNIG">PNOA@IGN</a>',
             //tms: true
-        }).addTo(map);
+        }).addTo(map);L.marker([38.5365419,-0.8202874]).addTo(map)
         map.setMaxBounds(bbox);
         // marker
-        var defaultIcon = L.icon({
-			iconUrl: 'css/images/marker-icon.png',
-			iconSize:     [25, 41], 
-			iconAnchor:   [22, 94], 
-			popupAnchor:  [-3, -76] 
-		});
-        var marker = L.marker([38.5365419,-0.8202874], {}).addTo(map);
+	L.marker([38.5365419,-0.8202874]).addTo(map);
     </script>
 </body>
 </html>
