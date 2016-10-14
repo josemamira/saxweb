@@ -148,8 +148,11 @@ function getPois() {
 	
 			$.each(data, function( i, value ) { 
 				// Listado
-				$( "#listado" ).append( "<li><a href='#' onclick='zoomTo("+data[i].lat+","+ data[i].lon+")' ><img src='https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png'>"+data[i].display_name+"</a>"+
-				"<a href='https://www.openstreetmap.org/relation/"+data[i].osm_id+"'><button>Detalles</button></a></li>" );
+				$( "#listado" ).append( "<li><a href='#' onclick='zoomTo("+data[i].lat+
+				","+ data[i].lon+")' ><img src='https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png'>"+
+				data[i].display_name+"</a>"
+				//"<a href='https://www.openstreetmap.org/relation/"+data[i].osm_id+"'><button>Detalles</button></a></li>" 
+				);
 				// Geojson
 				gj = L.geoJson( data[i].geojson,
 				{//style: myStyle,
