@@ -113,7 +113,14 @@ li a:hover {
 	var sidebar = L.control.sidebar('sidebar').addTo(map);
 	sidebar.open('home');
         
-        
+// icono
+	
+var myIcon = L.icon({
+    iconUrl: '../../../javascripts/leaflet/images/marker-icon.png',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+});    
 // zoom al elemento
 function zoomTo(lat,lng) {
 	if (circulo != undefined) {
@@ -163,7 +170,7 @@ function getPois() {
 			"<a href='https://www.openstreetmap.org/"+data[i].osm_type+"/"+data[i].osm_id+"'  target='_blank' ><button>Detalles</button></a></li>" );
 
 			// crear markers
-			gj = L.marker([data[i].lat, data[i].lon]);
+			gj = L.marker([data[i].lat, data[i].lon], {icon: myIcon});
 			//popup
 			var pos = new L.LatLng(data[i].lat, data[i].lon);
 			var popup = '<img src="'+ data[i].icon + '">&nbsp;'+data[i].type+ '<br>'+data[i].display_name;
