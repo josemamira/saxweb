@@ -77,7 +77,6 @@ li a:hover {
 					  <option value="restaurant">Restaurante</option>
 					  <option value="pub">pub</option>
 					  <option value="bar">bar</option>
-					  <option value="bar">bar</option>
 					  <option value="bank">bancos/cajas</option>
 					  <option value="parking">parking</option>						
 					</select> 
@@ -153,7 +152,7 @@ function getPois() {
 	$( "#listado" ).empty();
 	var selIdx=document.getElementById("opciones").selectedIndex;
 	var selValue = document.getElementsByTagName("option")[selIdx].value;//alert(selValue);
-	var geocode = 'http://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=['+selValue+']+sax&polygon_geojson=1&format=json&limit=100&viewbox=-0.83990,38.54390,-0.79702,38.52040&bounded=1'; //alert(geocode);
+	var geocode = 'https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=['+selValue+']+sax&polygon_geojson=1&format=json&limit=100&viewbox=-0.83990,38.54390,-0.79702,38.52040&bounded=1'; //alert(geocode);
     // llamada jquery para obtener json
 	$.getJSON(geocode, function(data) {
 		//var licence = data[0].licence;
