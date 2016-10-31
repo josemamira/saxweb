@@ -77,6 +77,9 @@ li a:hover {
 					  <option value="restaurant">Restaurante</option>
 					  <option value="pub">pub</option>
 					  <option value="bar">bar</option>
+					  <option value="bar">bar</option>
+					  <option value="bank">bancos/cajas</option>
+					  <option value="parking">parking</option>						
 					</select> 
 					<button onclick="getPois()">Buscar</button> 
 				</p>
@@ -128,53 +131,6 @@ function zoomTo(lat,lng) {
     // set the view
     map.setView([lat, lng], 18);
 }
-		
-// Evento click al boton btnSubmit
-function getPois() {
-	var selIdx=document.getElementById("opciones").selectedIndex;
-	var selValue = document.getElementsByTagName("option")[selIdx].value;//alert(selValue);
-	var geocode = 'https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=['+selValue+']+sax&polygon_geojson=1&format=json&limit=100&viewbox=-0.83990,38.54390,-0.79702,38.52040&bounded=1'; //alert(geocode);
-    // llamada jquery para obtener json
-	$.getJSON(geocode, function(data) {
-		var licence = data[0].licence;		  
-			
-			// borrar listado
-			$( "#listado" ).empty();
-			// Borrar elementos featuregroup
-			if (gj != undefined) {
-				limpiarJSON();
-			};
-			// Recorrer el array data para obtener el nombre y mostrarlo en el id listado
-	
-			$.each(data, function( i, value ) { 
-				// Listado
-				$( "#listado" ).append( "<li><a href='#' onclick='zoomTo("+data[i].lat+
-				","+ data[i].lon+")' ><img src='https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png'>"+
-				data[i].display_name+"</a>"
-				//"<a href='https://www.openstreetmap.org/relation/"+data[i].osm_id+"'><button>Detalles</button></a></li>" 
-				);
-				// Geojson
-				gj = L.geoJson( data[i].geojson,
-				{//style: myStyle,
-					onEachFeature: function (feature, layer) {
-						var popupText = '<img src="'+ data[i].icon + '">&nbsp;'+data[i].type+ '<br>'+data[i].display_name;
-						layer.bindPopup(popupText);
-					}
-				}).addTo(map);
-				
-			});
-			
-			FG.addLayer(gj);
-			var bounds = gj.getBounds(); 
-			map.fitBounds(bounds);
-			
-		});     
-
-} 		
-		
-		
-		
-
 
 /**
  * Variables necesarias para la funcionalidad de crear geojson de zzeepp de un dpto
@@ -189,7 +145,55 @@ var gj= L.geoJson();
 function limpiarJSON() {
     gj.clearLayers();
     map.removeLayer(FG);
-}	
+}	    
+	    
+// Evento click al boton btnSubmit
+function getPois() {
+	limpiarJSON();
+	$( "#listado" ).empty();
+	var selIdx=document.getElementById("opciones").selectedIndex;
+	var selValue = document.getElementsByTagName("option")[selIdx].value;//alert(selValue);
+	var geocode = 'http://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=['+selValue+']+sax&polygon_geojson=1&format=json&limit=100&viewbox=-0.83990,38.54390,-0.79702,38.52040&bounded=1'; //alert(geocode);
+    // llamada jquery para obtener json
+	$.getJSON(geocode, function(data) {
+		//var licence = data[0].licence;
+		// Recorrer el array data para obtener el nombre y mostrarlo en el id listado
+		$.each(data, function( i, value ) { 
+			// Listado
+			$( "#listado" ).append( "<li><a href='#'onclick='zoomTo("+data[i].lat+","+ data[i].lon+")' ><img src='https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png'>"+data[i].display_name+"</a>"+
+			"<a href='https://www.openstreetmap.org/"+data[i].osm_type+"/"+data[i].osm_id+"'  target='_blank' ><button>Detalles</button></a></li>" );
+
+			// crear markers
+			gj = L.marker([data[i].lat, data[i].lon]);
+			//popup
+			var pos = new L.LatLng(data[i].lat, data[i].lon);
+			var popup = '<img src="'+ data[i].icon + '">&nbsp;'+data[i].type+ '<br>'+data[i].display_name;
+			gj.bindPopup(popup);
+			FG.addLayer(gj);
+			var bounds = FG.getBounds(); 
+			map.fitBounds(bounds);
+
+/*
+			// Geojson
+			console.log(data[i].geojson);
+			gj = L.geoJson( data[i].geojson,{   //style: L.icon({ iconUrl: data[i].icon }),
+				onEachFeature: function (feature, layer) {
+					var popupText = '<img src="'+ data[i].icon + '">&nbsp;'+data[i].type+ '<br>'+data[i].display_name;
+					layer.bindPopup(popupText);
+				}
+			}).addTo(map);
+*/				
+		});
+					
+	});     
+
+} 			
+		
+		
+		
+
+
+	
 
 </script>
 
