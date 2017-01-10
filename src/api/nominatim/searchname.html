@@ -22,6 +22,8 @@ $("#btnSubmit").click(function(){
 	// a) modo jquery
 	//var locationVal = $('#location').val();
 	// b) modo html5
+	// Limpiar listado
+	$( "#listado" ).empty();
 	var locationVal = document.getElementById('location').value;
 	if (!locationVal) {
 		alert("NO has escrito nada");
