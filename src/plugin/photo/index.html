@@ -21,7 +21,7 @@
 	var map = L.map('map', {
 		maxZoom: 14
 	});
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'OpenStreetMap' }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'OpenStreetMap' }).addTo(map);
 
 	var photoLayer = L.photo.cluster().on('click', function (evt) {
 		var photo = evt.layer.photo,
@@ -69,8 +69,8 @@
 				photos.push({
 						lat: p.latitude,
 						lng: p.longitude,						
-						url: 'http://www.flickr.com/photos/'+p.id+'_'+p.secret+'.jpg',
-						caption: '<a id="'+p.id+'" title="'+p.title+'" href="http://www.flickr.com/photos/'+p.owner+'/'+p.id+'/" target="_new">'+p.title+'</a><br/>'+
+						url: 'https://www.flickr.com/photos/'+p.id+'_'+p.secret+'.jpg',
+						caption: '<a id="'+p.id+'" title="'+p.title+'" href="https://www.flickr.com/photos/'+p.owner+'/'+p.id+'/" target="_new">'+p.title+'</a><br/>'+
 								'<a href="https://www.flickr.com/">Flickr</a> &copy;&nbsp;<a href="http://www.flickr.com/photos/'+p.owner+'/" target="_new">'+p.ownername+'</a>, '+
 								pdate,
 						thumbnail:p.url_t
