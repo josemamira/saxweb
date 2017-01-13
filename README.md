@@ -15,6 +15,7 @@ Examples
   - Basic design
   - GeoAPI calls (Nominatim, Overpass)
   - Providers
+  - Leaflet plugins
   - Local data (GeoJSON)
   - Local Tiles (TMS or MbTiles)
   - etc.
