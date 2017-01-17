@@ -139,7 +139,7 @@ function zoomTo(lat,lng) {
 }
 
 /**
- * Variables necesarias para la funcionalidad de crear geojson de zzeepp de un dpto
+ * Variables necesarias para la funcionalidad de crear geojson 
  */ 
 var FG = new L.FeatureGroup().addTo(map);
 var gj= L.geoJson();
@@ -165,6 +165,7 @@ function getPois() {
 		//var licence = data[0].licence;
 		// Recorrer el array data para obtener el nombre y mostrarlo en el id listado
 		$.each(data, function( i, value ) { 
+			$( "#listado" ).empty();
 			// Listado
 			$( "#listado" ).append( "<li><a href='#'onclick='zoomTo("+data[i].lat+","+ data[i].lon+")' ><img src='https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png'>"+data[i].display_name+"</a>"+
 			"<a href='https://www.openstreetmap.org/"+data[i].osm_type+"/"+data[i].osm_id+"'  target='_blank' ><button>Detalles</button></a></li>" );
@@ -194,13 +195,7 @@ function getPois() {
 	});     
 
 } 			
-		
-		
-		
-
-
 	
-
 </script>
 
 </body>
