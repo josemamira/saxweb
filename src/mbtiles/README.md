@@ -5,4 +5,5 @@ Credits
 =============
 
 Created by José Manuel Mira and based in this [JSfiddle page] (http://jsfiddle.net/kochizufan/rj4Eh/). Thanks kochizufan 
+
 Full demo at [https://josemamira.github.io/saxweb/src/mbtiles/index.html] (https://josemamira.github.io/saxweb/src/mbtiles/index.html)
