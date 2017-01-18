@@ -22,7 +22,7 @@
       "type": "Feature",
       "properties": {
         "nombre": "Ayuntamiento",
-        "foto": "6834.jpg",
+        "foto": "6000.jpg",
         "icon": "ayuntamiento.svg",
         "alto": 50,
         "ancho": 150
@@ -39,7 +39,7 @@
       "type": "Feature",
       "properties": {
         "nombre": "Colegio Alberto Sols",
-        "foto": "6834.jpg",
+        "foto": "6544.jpg",
         "icon": "cole.svg",
         "alto": 50,
         "ancho": 150
@@ -56,7 +56,7 @@
       "type": "Feature",
       "properties": {
         "nombre": "Colegio Cervantes",
-        "foto": "6834.jpg",
+        "foto": "6664.jpg",
         "icon": "cole.svg",
         "alto": 50,
         "ancho": 150
@@ -73,7 +73,7 @@
       "type": "Feature",
       "properties": {
         "nombre": "Colegio Hermanas Carmelitas",
-        "foto": "6834.jpg",
+        "foto": "6776.jpg",
         "icon": "cole.svg",
         "alto": 50,
         "ancho": 150
@@ -90,7 +90,7 @@
       "type": "Feature",
       "properties": {
         "nombre": "Plaza de España",
-        "foto": "6834.jpg",
+        "foto": "6822.jpg",
         "icon": "parque.svg",
         "alto": 50,
         "ancho": 150
@@ -124,7 +124,7 @@
       "type": "Feature",
       "properties": {
         "nombre": "Parque del río",
-        "foto": "6834.jpg",
+        "foto": "aulac.jpg",
         "icon": "parque.svg",
         "alto": 50,
         "ancho": 150
@@ -152,13 +152,14 @@
     L.geoJson(misElementos,{
       pointToLayer: function(feature,latlng){
 		var ratIcon = L.icon({
-		  iconUrl: feature.properties.icon,
+		  iconUrl: "icons/"+feature.properties.icon,
 		  iconSize: [60,50]
 		});		  
         var marker = L.marker(latlng,{icon: ratIcon});
         
- 		if (feature.properties && feature.properties.nombre && feature.properties.texto) {
-			contenido = "<strong>"+feature.properties.nombre+"</strong><br>"+feature.properties.texto;
+ 		if (feature.properties && feature.properties.nombre && feature.properties.foto) {
+			contenido = "<strong>"+feature.properties.nombre+"</strong><br>"+
+				"<img src='fotos/'"+feature.properties.foto+"'>";
 			marker.bindPopup(contenido);
 		}       
         
