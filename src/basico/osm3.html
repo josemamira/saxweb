@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Mapa 9: GeoJSON y atributos</title>
+  <title>A Leaflet map!</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
@@ -21,76 +21,126 @@
     {
       "type": "Feature",
       "properties": {
-        "nombre": "Aula de cartografía",
-        "texto": "<img src='fotos/aulac.png' width='300'>",
-        "icon": "mundo.svg",
+        "nombre": "Ayuntamiento",
+        "foto": "6834.jpg",
+        "icon": "ayuntamiento.svg",
         "alto": 50,
         "ancho": 150
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.5113846063613892,
-          38.382776546968834
+          -0.8174514770507812,
+          38.53865795351536
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "nombre": "Mi facultad",
-        "texto": "<img src='fotos/6664.jpg' width='300'>",
-        "icon": "papelera.svg",
+        "nombre": "Colegio Alberto Sols",
+        "foto": "6834.jpg",
+        "icon": "cole.svg",
         "alto": 50,
         "ancho": 150
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.5146542191505432,
-          38.385331076277325
-        ]
-      }
-    },
- 
-    {
-      "type": "Feature",
-      "properties": {
-        "nombre": "Rectorado",
-        "texto": "<img src='fotos/6776.jpg' width='300'>",
-        "icon": "mundo.svg",
-        "alto": 50,
-        "ancho": 150
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -0.5116099119186401,
-          38.384794947977
+          -0.814887285232544,
+          38.53956428017888
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "nombre": "Club Social II",
-        "texto": "<img src='fotos/6834.jpg' width='300'>",
-        "icon": "mundo.svg",
+        "nombre": "Colegio Cervantes",
+        "foto": "6834.jpg",
+        "icon": "cole.svg",
         "alto": 50,
         "ancho": 150
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.5132997035980225,
-          38.38293633910159
+          -0.8184653520584105,
+          38.53535563892926
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Colegio Hermanas Carmelitas",
+        "foto": "6834.jpg",
+        "icon": "cole.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.8202409744262695,
+          38.534545772433866
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Plaza de España",
+        "foto": "6834.jpg",
+        "icon": "parque.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.8214855194091797,
+          38.5357081168362
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Parque de los Príncipes",
+        "foto": "6834.jpg",
+        "icon": "parque.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.8223974704742432,
+          38.53190629970049
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nombre": "Parque del río",
+        "foto": "6834.jpg",
+        "icon": "parque.svg",
+        "alto": 50,
+        "ancho": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.8151447772979736,
+          38.535779451440575
         ]
       }
     }
   ]
 }; 
   // initialize the map
-  var map = L.map('map').setView([38.384748, -0.514140], 16);
+  var map = L.map('map').setView([38.5365419,-0.8202874], 15);
  
   // load a tile layer
   L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -101,11 +151,11 @@
 
     L.geoJson(misElementos,{
       pointToLayer: function(feature,latlng){
-		var miIcon = L.icon({
+		var ratIcon = L.icon({
 		  iconUrl: feature.properties.icon,
 		  iconSize: [60,50]
 		});		  
-        var marker = L.marker(latlng,{icon: miIcon});
+        var marker = L.marker(latlng,{icon: ratIcon});
         
  		if (feature.properties && feature.properties.nombre && feature.properties.texto) {
 			contenido = "<strong>"+feature.properties.nombre+"</strong><br>"+feature.properties.texto;
