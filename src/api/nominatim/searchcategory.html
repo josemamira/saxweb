@@ -157,7 +157,6 @@ function limpiarJSON() {
 // Evento click al boton btnSubmit
 function getPois() {
 	limpiarJSON();
-	$( "#listado" ).empty();
 	var selIdx=document.getElementById("opciones").selectedIndex;
 	var selValue = document.getElementsByTagName("option")[selIdx].value;//alert(selValue);
 	var geocode = 'https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=['+selValue+']+sax&polygon_geojson=1&format=json&limit=100&viewbox=-0.83990,38.54390,-0.79702,38.52040&bounded=1'; //alert(geocode);
@@ -165,8 +164,7 @@ function getPois() {
 	$.getJSON(geocode, function(data) {
 		//var licence = data[0].licence;
 		// Recorrer el array data para obtener el nombre y mostrarlo en el id listado
-		$.each(data, function( i, value ) { 
-			$( "#listado" ).empty();
+		$.each(data, function( i, value ) { 			
 			// Listado
 			$( "#listado" ).append( "<li><a href='#'onclick='zoomTo("+data[i].lat+","+ data[i].lon+")' ><img src='https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png'>"+data[i].display_name+"</a>"+
 			"<a href='https://www.openstreetmap.org/"+data[i].osm_type+"/"+data[i].osm_id+"'  target='_blank' ><button>Detalles</button></a></li>" );
