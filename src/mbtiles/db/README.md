@@ -1,6 +1,6 @@
 Instructions
 ============
 
-Put here your mbtiles.file
+Put here your mbtiles file
 
-metadata table must contain with bounds,minzoom,maxzoom and attribution
+Metadata table must contain with bounds,minzoom,maxzoom and attribution
