@@ -72,6 +72,7 @@ li a:hover {
                 <p class="lorem">Selecciona lo que quieres buscar.</p>
                 <p>
 					<select id="opciones">
+					  <option value="nada">SELECCIONA UNA CATEGOR&Iacute;A</option>
 					  <option value="bakery">Panadería</option>
 					  <option value="cafe">Cafetería</option>
 					  <option value="restaurant">Restaurante</option>
@@ -82,6 +83,7 @@ li a:hover {
 					</select> 
 					<button onclick="getPois()">Buscar</button> 
 				</p>
+				<p><div id="cuenta"></div></p>
 				<ul id="listado"></ul>
 				<p><div id="info"></div></p>
 
@@ -149,53 +151,70 @@ var gj= L.geoJson();
  * Las variables se han declarado arriba de esta función   
  **/
 function limpiarJSON() {
-    gj.clearLayers();
+    FG.clearLayers();
     map.removeLayer(FG);
     $( "#listado" ).empty();
+    //alert("listado borrado");
 }	    
 	    
 // Evento click al boton btnSubmit
+
+
 function getPois() {
 	limpiarJSON();
 	var selIdx=document.getElementById("opciones").selectedIndex;
 	var selValue = document.getElementsByTagName("option")[selIdx].value;//alert(selValue);
-	var geocode = 'https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=['+selValue+']+sax&polygon_geojson=1&format=json&limit=100&viewbox=-0.83990,38.54390,-0.79702,38.52040&bounded=1'; //alert(geocode);
-    // llamada jquery para obtener json
-	$.getJSON(geocode, function(data) {
-		//var licence = data[0].licence;
-		// Recorrer el array data para obtener el nombre y mostrarlo en el id listado
-		$.each(data, function( i, value ) { 			
-			// Listado
-			$( "#listado" ).append( "<li><a href='#'onclick='zoomTo("+data[i].lat+","+ data[i].lon+")' ><img src='https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png'>"+data[i].display_name+"</a>"+
-			"<a href='https://www.openstreetmap.org/"+data[i].osm_type+"/"+data[i].osm_id+"'  target='_blank' ><button>Detalles</button></a></li>" );
+	if (selValue == "nada")  { 
+		alert("Selecciona una categoría");
+	} else {
 
-			// crear markers
-			gj = L.marker([data[i].lat, data[i].lon], {icon: myIcon});
-			//popup
-			var pos = new L.LatLng(data[i].lat, data[i].lon);
-			var popup = '<img src="'+ data[i].icon + '">&nbsp;'+data[i].type+ '<br>'+data[i].display_name;
-			gj.bindPopup(popup);
-			FG.addLayer(gj);
-			var bounds = FG.getBounds(); 
-			map.fitBounds(bounds);
+	var viewbox = "-0.83990,38.54390,-0.79702,38.52040";
+	var geocode = 'https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=['+selValue+']+sax&polygon_geojson=1&format=json&limit=100&viewbox='+viewbox+'&bounded=1'; //alert(geocode);
 
-/*
-			// Geojson
-			console.log(data[i].geojson);
-			gj = L.geoJson( data[i].geojson,{   //style: L.icon({ iconUrl: data[i].icon }),
-				onEachFeature: function (feature, layer) {
-					var popupText = '<img src="'+ data[i].icon + '">&nbsp;'+data[i].type+ '<br>'+data[i].display_name;
-					layer.bindPopup(popupText);
-				}
-			}).addTo(map);
-*/				
-		});
-					
-	});     
 
-} 			
+	$.ajax({ 
+		type: 'GET', 
+		url: geocode, 
+		//data: { get_param: 'value' }, 
+		dataType: 'json',
+		success: function (data) { 
+			$("#cuenta").html("Encontrados: <strong>"+data.length +"</strong>");
+			eval(data);
+			if (gj != undefined)
+			{
+				if(typeof gj != undefined)
+				{
+					//alert("ya existe y lo borro");
+					limpiarJSON();
+				}	
+				
+				$.each(data, function(i, value) {
+					// Listado
+					$( "#listado" ).append( "<li><a href='#'onclick='zoomTo("+data[i].lat+","+ data[i].lon+")' >"+
+						"<img src='https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png'>"+data[i].display_name+"</a>"+
+						"<a href='https://www.openstreetmap.org/"+data[i].osm_type+"/"+data[i].osm_id+"'  target='_blank' ><button>Detalles</button></a><HR></li>" );
+
+					// crear markers
+					var pos = new L.LatLng(data[i].lat, data[i].lon);
+					gj = L.marker(pos);
+					//gj = L.marker([data[i].lat, data[i].lon]);
+					//popup
+					var popup = '<img src="'+ data[i].icon + '">&nbsp;'+data[i].type+ '<br>'+data[i].display_name;
+					gj.bindPopup(popup);
+					FG.addLayer(gj);
+					FG.addTo(map);  
+					var bounds = FG.getBounds(); 
+					map.fitBounds(bounds);	
+				});
+			}
+		}
+	});   
+  }
+} 	
+
 	
 </script>
 
 </body>
 </html>
+
