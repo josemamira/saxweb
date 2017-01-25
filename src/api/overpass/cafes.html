@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Leaflet OverPass Layer demo page (cafe)</title>
+    <title>Leaflet OverPass Layer demo page (cuartelillos)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../../javascripts/leaflet/leaflet.css" />
@@ -55,9 +55,13 @@
 		});        
         
 
+		// Servidores. Ver http://wiki.openstreetmap.org/wiki/Overpass_API
+		// HTTPS: https://overpass-api.de/api
+		// HTTP:  http://overpass.osm.rambler.ru/cgi/
+		
         var opl = new L.OverPassLayer({
             debug: true,
-            endPoint: 'https://overpass-api.de/api/',
+            endPoint: 'https://overpass-api.de/api',
             query: 'node({{bbox}})["amenity"="cafe"];out;', 
             markerIcon:  mycIcon,    
             minZoomIndicatorOptions: {
