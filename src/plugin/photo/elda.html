@@ -63,7 +63,8 @@
 				var p = data.photos.photo[i];		
 				// Date
 				var pdate = new Date(p.dateupload*1000);
-				var months = ['January','February','March','April','May','June','July','August','Septepmber','October','November','December'];
+				//var months = ['January','February','March','April','May','June','July','August','Septepmber','October','November','December'];
+		    		var months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 				pdate = pdate.getDate()+'&nbsp;'+months[pdate.getMonth()]+'&nbsp;'+pdate.getFullYear();
 				// Push				
 				photos.push({
