@@ -20,7 +20,7 @@
 	var map = L.map('map', {
 		maxZoom: 19
 	});
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'OpenStreetMap' }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: 'OpenStreetMap' }).addTo(map);
 
 	var photoLayer = L.photo.cluster().on('click', function (evt) {
 		var photo = evt.layer.photo,
